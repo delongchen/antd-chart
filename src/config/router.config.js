@@ -1,6 +1,6 @@
 import BasicLayout from "@/layout/BasicLayout";
 
-const RouteView = {name: 'RouteView', render: h => h('router-view')}
+//const RouteView = {name: 'RouteView', render: h => h('router-view')}
 
 export const constantRouterMap = [
   {
@@ -10,16 +10,22 @@ export const constantRouterMap = [
     meta: { title: '主页' },
     children: [
       {
-        path: '/dashboard',
-        name: 'dashboard',
-        component: RouteView,
-        meta: { title: 'menu.dashboard', keepAlive: true, icon: 'qq' },
-      },
-      {
         path: '/form',
         name: 'form',
         meta: { title: '表单', keepAlive: true, icon: 'form' },
         component: () => import('@/views/form')
+      },
+      {
+        path: '/history',
+        name: 'history',
+        meta: { title: '历史记录', keepAlive: true, icon: 'history' },
+        component: () => import('@/views/history')
+      },
+      {
+        path: '/chart',
+        name: 'chart',
+        meta: { title: '图表', icon: 'pie-chart' },
+        component: () => import('@/views/chart')
       }
     ]
   }
