@@ -6,6 +6,7 @@
 
     <a-row :gutter="24">
       <a-card :bordered="false" :body-style="{ padding: '0'}">
+        <p />
       </a-card>
     </a-row>
   </page-header-wrapper>
@@ -15,7 +16,7 @@
   import { mapState } from 'vuex'
 
   export default {
-    name: "index",
+    name: "Chart",
     data() {
       return {
         r: 1

@@ -80,25 +80,12 @@
     methods: {
       handleSubmit(event) {
         event.preventDefault()
-
         this.form.validateFields((err, val) => {
           if (!err) {
-            const parameter = val
-            const title = []
-            const cmc = parameter['cmc']
-            delete parameter['cmc']
-            cmc[0] !== undefined && (parameter['num_college'] = cmc[0]) && (title.push(cmc[0]))
-            cmc[1] !== undefined && (parameter['num_major'] = cmc[1]) && (title.push(cmc[1]))
-            cmc[2] !== undefined && (parameter['num_college'] = cmc[2]) && (title.push(cmc[2]))
-            val['num_gr'] !== 0 && title.push(val['num_gr'] + '级')
-            val['sex'] !== null && title.push(val['sex'] === 0 ? '女': '男')
-            parameter.title = title.join('-')
-
             this.$store
-              .dispatch('user/GetInfo', parameter)
-              .then(response => {
+              .dispatch('user/GetInfo', val)
+              .then(() => {
                 this.$router.push('/chart')
-                this.$store.commit('user/SET_NOW', response.id)
               })
           }
         })

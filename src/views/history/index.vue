@@ -25,7 +25,7 @@
   import { mapState } from 'vuex'
 
   export default {
-    name: "index",
+    name: "History",
     computed: {
       ...mapState('user', {
         rooms: 'history'
