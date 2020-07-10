@@ -13,11 +13,10 @@ export default new Vuex.Store({
     user,
   },
   state: {
-    cur: -1,
+    cur: null,
     historyStore: [],
     count: 0,
     historyMap: new HS(),
-    fuck: 0
   },
   mutations: {
     ADD_ROOM_TO_HISTORY: (state, room) => {
@@ -26,14 +25,13 @@ export default new Vuex.Store({
       state.count++
     },
     SET_NOW(state, id) {id !== state.cur && (state.cur = id)},
-    FUCK: state => state.fuck++
   },
   getters: {
     findHistory: state => hash => {
       return state.historyMap.find(hash)
     },
     CURRENT_ROOM(state) {
-      return state.history[state.cur]
+      return state.historyStore[state.cur]
     },
     ROOM_COUNT(state) {
       return state.count

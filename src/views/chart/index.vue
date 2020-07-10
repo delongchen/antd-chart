@@ -5,7 +5,7 @@
 
     <a-row :gutter="24">
       <a-card :bordered="false" :body-style="{ padding: '0'}">
-        <point-chart/>
+        <point-chart v-if="$store.state.historyStore.length !== 0"/>
       </a-card>
     </a-row>
   </page-header-wrapper>

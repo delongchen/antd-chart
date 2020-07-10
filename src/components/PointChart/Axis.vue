@@ -23,15 +23,18 @@
         style="text-anchor: start; fill: #2c3e50"
       >寝室平均</text>
     </g>
+    <p>{{ room }}</p>
   </g>
 </template>
 
 <script>
   import { select } from 'd3-selection'
   import { axisBottom, axisLeft } from 'd3-axis'
+  import BaseMixin from './baseMixin'
 
   export default {
     name: "Axis",
+    mixins: [BaseMixin],
     props: {
       height: {
         type: Number,
@@ -41,14 +44,6 @@
         type: Number,
         required: true
       },
-      scale_x: {
-        type: Object,
-        required: true
-      },
-      scale_y: {
-        type: Object,
-        required: true
-      }
     },
     methods: {
       mount_axis_x() {
@@ -56,10 +51,14 @@
       },
       mount_axis_y() {
         select('#axis_y').call(axisLeft(this.scale_y))
+      },
+    },
+    watch: {
+      width() {
+        this.mount_axis_x()
       }
     },
     mounted() {
-      this.mount_axis_x()
       this.mount_axis_y()
     }
   }

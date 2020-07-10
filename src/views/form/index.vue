@@ -59,7 +59,6 @@
           <a-button style="margin-left: 8px" htmlType="reset">重置</a-button>
         </a-form-item>
       </a-form>
-      <button @click="$store.commit('FUCK')">{{ fuck }}</button>
     </a-card>
   </page-header-wrapper>
 </template>
@@ -88,18 +87,13 @@
             this.$store
               .dispatch('user/GetInfo', val)
               .then(id => {
-                this.$router.push('/chart')
                 this.$store.commit('SET_NOW', id)
+                this.$router.push('/chart')
               })
           }
         })
       },
     },
-    watch: {
-      '$store.state.fuck'() {
-        this.fuck += 'a'
-      }
-    }
   }
 </script>
 
