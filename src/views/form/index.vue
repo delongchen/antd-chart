@@ -56,15 +56,17 @@
           style="text-align: center"
         >
           <a-button htmlType="submit" type="primary">提交</a-button>
-          <a-button style="margin-left: 8px" @click="onReset">重置</a-button>
+          <a-button style="margin-left: 8px" htmlType="reset">重置</a-button>
         </a-form-item>
       </a-form>
+      <button @click="$store.commit('FUCK')">{{ fuck }}</button>
     </a-card>
   </page-header-wrapper>
 </template>
 
 <script>
   import { data } from "@/views/form/form";
+
   const grade = []
   for (let i = 2012; i < 2020; i++) grade.push(i)
 
@@ -75,6 +77,7 @@
         form: this.$form.createForm(this),
         data,
         grade,
+        fuck: 'a'
       }
     },
     methods: {
@@ -84,14 +87,17 @@
           if (!err) {
             this.$store
               .dispatch('user/GetInfo', val)
-              .then(() => {
+              .then(id => {
                 this.$router.push('/chart')
+                this.$store.commit('SET_NOW', id)
               })
           }
         })
       },
-      onReset() {
-
+    },
+    watch: {
+      '$store.state.fuck'() {
+        this.fuck += 'a'
       }
     }
   }

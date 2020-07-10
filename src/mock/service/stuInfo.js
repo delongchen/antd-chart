@@ -2285,8 +2285,7 @@ const info = [
   }
 ]
 
-const stuInfos = options => {
-  console.log(options)
+const stuInfos = () => {
   return info
 }
 

@@ -6,12 +6,16 @@ export const Trie = function (val) {
 }
 
 Trie.prototype.find = function (li) {
-  if (li.length > 0) {
-    if (this.children === null) return null
-    const now = li.shift()
-     return this.children[now] !== undefined ? this.children[now].find(li) : null
+  let now = this
+  while (li.length > 0) {
+    if (now.children === null) return null
+    const k = li.shift()
+    if (now.children[k] === undefined) {
+      return null
+    }
+    now = now.children[k]
   }
-  return this
+  return now
 }
 
 Trie.prototype.add = function (li, id) {

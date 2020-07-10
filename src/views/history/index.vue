@@ -12,7 +12,7 @@
             <div class="meta-content" slot="description">{{ `id=${item.id}` }}</div>
           </a-card-meta>
           <template class="ant-card-actions" #actions>
-            <a>图表</a>
+            <a @click="goToChart(item.id)">图表</a>
             <a>详情</a>
           </template>
         </a-card>
@@ -27,9 +27,15 @@
   export default {
     name: "History",
     computed: {
-      ...mapState('user', {
-        rooms: 'history'
+      ...mapState({
+        rooms: 'historyStore'
       })
+    },
+    methods: {
+      goToChart(id) {
+        this.$router.push('/chart')
+        this.$store.commit('SET_NOW', id)
+      }
     }
   }
 </script>

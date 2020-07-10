@@ -24,13 +24,14 @@ export const constantRouterMap = [
       {
         path: '/chart',
         name: 'chart',
-        meta: { title: '图表', icon: 'pie-chart', keepAlive: true },
+        meta: { title: '图表', icon: 'pie-chart' },
         component: () => import('@/views/chart')
       },
       {
         path: '/recommend',
         name: 'recommend',
-        meta: { title: '业务推荐', icon: 'like', keepAlive: true }
+        meta: { title: '业务推荐', icon: 'like', keepAlive: true },
+        component: () => import('@/views/recommend')
       }
     ]
   }
