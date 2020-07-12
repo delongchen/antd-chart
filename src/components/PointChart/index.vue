@@ -1,5 +1,5 @@
 <template>
-  <div id="chartContainer">
+  <a-card :bordered="false" :body-style="{ padding: '0'}" id="" :loading="$store.state.loading">
     <svg :width="pageWidth" :height="defaultHeight">
       <g :transform="`translate(${m.left}, ${m.top})`">
         <chart-title :width="chartWidth" :room="room"/>
@@ -24,7 +24,9 @@
           :info="f"/>
       </g>
     </svg>
-  </div>
+    <controller/>
+    <room-list v-if="$store.state.chart.selectedColor !== null"/>
+  </a-card>
 </template>
 
 <script>
@@ -32,6 +34,8 @@
   import ChartTitle from '@/components/PointChart/Title'
   import Points from "@/components/PointChart/Points";
   import Lines from "@/components/PointChart/Lines"
+  import Controller from "@/components/PointChart/Controller";
+  import RoomList from "@/components/PointChart/RoomList";
 
   import { fs } from "@/components/PointChart/fs";
   import {scaleLinear} from "d3-scale";
@@ -42,7 +46,9 @@
       Axis,
       ChartTitle,
       Points,
-      Lines
+      Lines,
+      Controller,
+      RoomList
     },
     data() {
       return {
@@ -51,11 +57,12 @@
         m: {
           top: 80,
           right: 50,
-          bottom: 70,
+          bottom: 50,
           left: 70
         },
         fs,
-        curF: 0
+        curF: 0,
+
       }
     },
     methods: {
@@ -73,11 +80,11 @@
       chartWidth() {
         return this.pageWidth - this.m.right - this.m.left
       },
-      f() {
-        return this.fs[this.curF]
-      },
       room() {
         return this.$store.getters.CURRENT_ROOM
+      },
+      f() {
+        return this.fs[this.curF]
       },
       scale_x() {
         return scaleLinear().domain([
@@ -93,11 +100,10 @@
       }
     },
     mounted() {
-      this.pageWidth = document.getElementById('chartContainer').offsetWidth
+      this.pageWidth = this.$el.offsetWidth
     }
   }
 </script>
 
 <style scoped>
-
 </style>

@@ -76,7 +76,6 @@
         form: this.$form.createForm(this),
         data,
         grade,
-        fuck: 'a'
       }
     },
     methods: {
@@ -84,12 +83,8 @@
         event.preventDefault()
         this.form.validateFields((err, val) => {
           if (!err) {
-            this.$store
-              .dispatch('user/GetInfo', val)
-              .then(id => {
-                this.$store.commit('SET_NOW', id)
-                this.$router.push('/chart')
-              })
+            this.$router.push('/chart')
+            this.$store.dispatch('user/GetInfo', val)
           }
         })
       },

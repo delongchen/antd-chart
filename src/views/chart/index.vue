@@ -4,9 +4,7 @@
     </template>
 
     <a-row :gutter="24">
-      <a-card :bordered="false" :body-style="{ padding: '0'}">
-        <point-chart v-if="$store.state.historyStore.length !== 0"/>
-      </a-card>
+      <point-chart v-if="$store.state.historyStore.length !== 0"/>
     </a-row>
   </page-header-wrapper>
 </template>
@@ -18,11 +16,7 @@
     name: "Chart",
     components: {
       PointChart
-    },
-    data() {
-      return {
-      }
-    },
+    }
   }
 </script>
 

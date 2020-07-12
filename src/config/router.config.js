@@ -24,7 +24,7 @@ export const constantRouterMap = [
       {
         path: '/chart',
         name: 'chart',
-        meta: { title: '图表', icon: 'pie-chart', keepAlive: true },
+        meta: { title: '图表', icon: 'pie-chart' },
         component: () => import('@/views/chart')
       },
       {

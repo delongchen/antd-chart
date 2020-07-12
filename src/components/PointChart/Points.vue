@@ -9,8 +9,8 @@
       :fill="v.infos.color"
       :cx="scale_x(fx(v.infos))"
       :cy="scale_y(fy(v.infos))"
-      @click="null"
-  />
+      @click="() => { $store.commit('chart/SET_ROOM_KEY', k) }"
+    />
   </g>
 </template>
 

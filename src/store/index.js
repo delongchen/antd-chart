@@ -3,6 +3,7 @@ import Vuex from "vuex"
 
 import app from "@/store/modules/app";
 import user from "@/store/modules/user";
+import chart from '@/store/modules/chartStore'
 import {HS} from "@/utils/historyStore";
 
 Vue.use(Vuex)
@@ -11,12 +12,14 @@ export default new Vuex.Store({
   modules: {
     app,
     user,
+    chart
   },
   state: {
     cur: null,
     historyStore: [],
     count: 0,
     historyMap: new HS(),
+    loading: false
   },
   mutations: {
     ADD_ROOM_TO_HISTORY: (state, room) => {
@@ -25,6 +28,7 @@ export default new Vuex.Store({
       state.count++
     },
     SET_NOW(state, id) {id !== state.cur && (state.cur = id)},
+    CHANGE_LOADING(state) { state.loading = !state.loading }
   },
   getters: {
     findHistory: state => hash => {
