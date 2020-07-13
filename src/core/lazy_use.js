@@ -35,6 +35,7 @@ import {
   Divider,
   DatePicker,
   TimePicker,
+  Empty,
   Upload,
   Progress,
   Skeleton,
@@ -48,6 +49,7 @@ import {
 } from 'ant-design-vue'
 
 Vue.use(Cascader)
+Vue.use(Empty)
 Vue.use(ConfigProvider)
 Vue.use(Layout)
 Vue.use(Input)
@@ -96,5 +98,8 @@ Vue.prototype.$info = Modal.info
 Vue.prototype.$success = Modal.success
 Vue.prototype.$error = Modal.error
 Vue.prototype.$warning = Modal.warning
+
+import Dialog from "@/components/Dialog";
+Vue.use(Dialog)
 
 process.env.NODE_ENV !== 'production' && console.warn('[antd-pro] NOTICE: Antd use lazy-load.')

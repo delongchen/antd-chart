@@ -8,6 +8,7 @@ export const constantRouterMap = [
     name: 'index',
     component: BasicLayout,
     meta: { title: '主页' },
+    redirect: 'form',
     children: [
       {
         path: '/form',

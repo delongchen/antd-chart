@@ -5,19 +5,21 @@
         <a-tag
           v-for="(v, k) in members"
           :key="k"
-          :color="v.gua ? 'red': 'green'"
-        >
-        {{ v.name_stu }}
-      </a-tag>
+          :color="v.gua ? 'red': 'green'">
+          {{ v.name_stu }}
+        </a-tag>
       </span>
       <span slot="actions" slot-scope="record">
-        <a>{{ record.key }}</a>
+        <a @click="checkIt(record)">查看详细</a>
+        <a-divider type="vertical"/>
+        <a>加入对比</a>
       </span>
     </a-table>
   </div>
 </template>
 
 <script>
+
   const columns = [
     {
       dataIndex: 'name',
@@ -26,20 +28,23 @@
     {
       dataIndex: 'list',
       title: 'Member',
-      scopedSlots: { customRender: 'member' },
+      scopedSlots: {customRender: 'member'},
     },
     {
       title: 'Actions',
-      scopedSlots: { customRender: 'actions' },
+      scopedSlots: {customRender: 'actions'},
       key: 'actions'
     }
   ]
 
+  import dialogMixin from "@/components/PointChart/DialogPage/dialogMixin";
+
   export default {
     name: "RoomList",
+    mixins: [dialogMixin],
     data() {
       return {
-        columns
+        columns,
       }
     },
     computed: {
@@ -52,6 +57,8 @@
       selectedRoom() {
         return this.curRoom.gradeCounter[this.curColor]
       }
+    },
+    methods: {
     }
   }
 </script>
