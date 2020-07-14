@@ -1,5 +1,5 @@
 <template>
-  <a-card :bordered="false" :body-style="{ padding: '0'}" id="" :loading="$store.state.loading">
+  <a-card :bordered="false" :body-style="{ padding: '0'}" id="">
     <svg :width="pageWidth" :height="defaultHeight">
       <g :transform="`translate(${m.left}, ${m.top})`">
         <chart-title :width="chartWidth" :room="room"/>
@@ -16,6 +16,7 @@
           :scale_y="scale_y"
           :info="f"/>
         <lines
+          v-show="$store.state.chart.showLines"
           :room="room"
           :chart-height="chartHeight"
           :m="m"

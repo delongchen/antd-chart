@@ -12,6 +12,7 @@ const user = {
   actions: {
     GetInfo({commit, rootGetters}, val) {
       return new Promise((resolve, reject) => {
+        commit('SET_LOADING', true, { root: true })
         const parameter = parameterWrapper(val)
         const id = rootGetters.findHistory(parameter.title)
         if (id === null) {

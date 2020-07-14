@@ -84,7 +84,12 @@
         this.form.validateFields((err, val) => {
           if (!err) {
             this.$router.push('/chart')
-            this.$store.dispatch('user/GetInfo', val)
+            this.$store
+              .dispatch('user/GetInfo', val)
+              .then(() => {})
+              .catch(() => {
+                this.$message.error('错误')
+            }).finally(() => void this.$store.commit('SET_LOADING', false))
           }
         })
       },

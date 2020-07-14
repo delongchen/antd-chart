@@ -5,15 +5,19 @@
         <a-tag
           v-for="(v, k) in members"
           :key="k"
+          @click="showSinglePeople(v)"
           :color="v.gua ? 'red': 'green'">
           {{ v.name_stu }}
         </a-tag>
       </span>
-      <span slot="actions" slot-scope="record">
-        <a @click="checkIt(record)">查看详细</a>
-        <a-divider type="vertical"/>
+      <span slot="actions" slot-scope="">
         <a>加入对比</a>
       </span>
+      <single-room
+        slot-scope="room"
+        :record="room"
+        slot="expandedRowRender"
+      />
     </a-table>
   </div>
 </template>
@@ -37,11 +41,12 @@
     }
   ]
 
-  import dialogMixin from "@/components/PointChart/DialogPage/dialogMixin";
+  import SingleRoom from "@/components/PointChart/DialogPage/SingleRoom";
+  import SinglePeople from "@/components/PointChart/DialogPage/SinglePeople";
 
   export default {
     name: "RoomList",
-    mixins: [dialogMixin],
+    components: { SingleRoom },
     data() {
       return {
         columns,
@@ -59,6 +64,22 @@
       }
     },
     methods: {
+      showSinglePeople(member) {
+        this.$dialog(
+          SinglePeople,
+          {
+            record: member
+          },
+          {
+            title: member.name_stu,
+            width: 1000,
+            centered: true,
+            maskClosable: false,
+            'ok-text': '关闭',
+            'cancel-text': '加入对比'
+          }
+        )
+      }
     }
   }
 </script>

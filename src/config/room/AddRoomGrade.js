@@ -1,6 +1,8 @@
 import { pointsColorConfig } from '@/config/pointsColorConfig'
+import { StuRank } from "@/utils/StuRankUtil";
 
 const color_mapping = pointsColorConfig.color_mapping
+const rank = new StuRank()
 
 const settings = {
   qualified : 60,
@@ -33,6 +35,9 @@ function roomInfosOf(list) {
 
   for (let i = 0; i < roomSize; i++) {
     stu = list[i];
+    stu.tag = []
+
+    stu.key = i
     now_y = stu['vy'];
     now_x = stu['vx'];
 
@@ -40,6 +45,8 @@ function roomInfosOf(list) {
     //counter
     vx += now_x;
     vy += now_y;
+
+    rank.add(stu)
   }
 
   vy = Math.floor(vy / roomSize);
@@ -107,4 +114,5 @@ export function AddRoomGrade(who) {
     vx: min_x,
     vy: min_y
   }
+  who.rank = rank
 }

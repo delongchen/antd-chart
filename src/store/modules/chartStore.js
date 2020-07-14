@@ -2,7 +2,8 @@ export default {
   namespaced: true,
   state: {
     curRoomKey: null,
-    selectedColor: null
+    selectedColor: null,
+    showLines: false
   },
   mutations: {
     SET_ROOM_KEY(state, key) { state.curRoomKey !== key && (state.curRoomKey = key) },

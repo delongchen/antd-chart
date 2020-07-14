@@ -5,6 +5,7 @@ import app from "@/store/modules/app";
 import user from "@/store/modules/user";
 import chart from '@/store/modules/chartStore'
 import {HS} from "@/utils/historyStore";
+import stuTag from "@/store/modules/stuTagStore";
 
 Vue.use(Vuex)
 
@@ -12,7 +13,8 @@ export default new Vuex.Store({
   modules: {
     app,
     user,
-    chart
+    chart,
+    stuTag
   },
   state: {
     cur: null,
@@ -28,7 +30,7 @@ export default new Vuex.Store({
       state.count++
     },
     SET_NOW(state, id) {id !== state.cur && (state.cur = id)},
-    CHANGE_LOADING(state) { state.loading = !state.loading }
+    SET_LOADING(state, status) { state.loading = status }
   },
   getters: {
     findHistory: state => hash => {

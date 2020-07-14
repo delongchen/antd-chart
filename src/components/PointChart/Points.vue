@@ -11,10 +11,12 @@
       :fill="v.infos.color"
       :cx="scale_x(fx(v.infos))"
       :cy="scale_y(fy(v.infos))"
-      @click="() => {
+      @mouseenter="() => {
         $store.commit('chart/SET_ROOM_KEY', k)
-        checkIt(v)
+        $store.state.chart.showLines = true
       }"
+      @mouseleave="() => {$store.state.chart.showLines = false}"
+      @click="() => {checkIt(v)}"
     />
     </a-tooltip>
   </g>
@@ -22,11 +24,29 @@
 
 <script>
   import BaseMixin from './baseMixin'
-  import dialogMixin from "@/components/PointChart/DialogPage/dialogMixin";
+  import SingleRoom from "@/components/PointChart/DialogPage/SingleRoom";
 
   export default {
     name: "Points",
-    mixins: [BaseMixin, dialogMixin]
+    mixins: [BaseMixin],
+    methods: {
+      checkIt(room) {
+        this.$dialog(
+          SingleRoom,
+          {
+            record: room
+          },
+          {
+            title: room.name,
+            width: 1000,
+            centered: true,
+            maskClosable: false,
+            'ok-text': '关闭',
+            'cancel-text': '加入对比'
+          }
+        )
+      }
+    }
   }
 </script>
 
