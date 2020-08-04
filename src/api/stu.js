@@ -1,13 +1,13 @@
 import axiosInstance from "@/utils/request";
 
 const API = {
-  StuInfo: '/info'
+  StuInfo: '/nb.json'
 }
 
-export function getInfo(parameter) {
+export function getInfo() {
   return axiosInstance({
     url: API.StuInfo,
-    method: 'post',
-    data: parameter
+    method: 'get',
+    //data: parameter
   })
 }

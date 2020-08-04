@@ -5,7 +5,8 @@ import { VueAxios } from "./axios";
 //import { ACCESS_TOKEN } from "@/store/mutation-types";
 
 const axiosInstance = axios.create({
-  baseURL: process.env.VUE_APP_API_BASE_URL,
+  baseURL: '/',
+  //baseURL: process.env.VUE_APP_API_BASE_URL,
   timeout: 6000
 })
 

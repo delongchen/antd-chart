@@ -1,66 +1,4 @@
-import { pointsColorConfig } from '@/config/pointsColorConfig'
-import { StuRank } from "@/utils/StuRankUtil";
-
-const color_mapping = pointsColorConfig.color_mapping
-const rank = new StuRank()
-
-const settings = {
-  qualified : 60,
-  defaultR : 2,
-  yWeight: 0.7,
-  xWeight: 0.3
-};
-
-function grade_rule(size, q_ed, vy) {
-  switch (q_ed) {
-    case 0: return 'red';
-    case size: return 'green';
-    default: return vy >= 60 ? 'blue' : 'yellow'
-  }
-}
-
-const weightOf = (x, y) =>  (settings.yWeight * y) + (settings.xWeight * x);
-
-function roomInfosOf(list) {
-  const roomSize = list.length;
-
-  let
-    qualifiedNum = roomSize,
-    stu,
-    grade,
-    vx = 0,
-    vy = 0,
-    now_x,
-    now_y;
-
-  for (let i = 0; i < roomSize; i++) {
-    stu = list[i];
-    stu.tag = []
-
-    stu.key = i
-    now_y = stu['vy'];
-    now_x = stu['vx'];
-
-    if ((stu.gua = (weightOf(now_x, now_y) < settings.qualified))) qualifiedNum -= 1;
-    //counter
-    vx += now_x;
-    vy += now_y;
-
-    rank.add(stu)
-  }
-
-  vy = Math.floor(vy / roomSize);
-  grade = grade_rule(roomSize, qualifiedNum, vy);
-
-  //对应room.infos
-  return {
-    grade,//等级 即颜色
-    color: color_mapping[grade].color,
-    r: Math.sqrt(Math.pow(roomSize, 3)) + settings.defaultR,// 圆点半径
-    vx: Math.floor(vx / roomSize),
-    vy
-  }
-}
+import { roomInfosOf } from "@/utils/scoreUtils";
 
 function Room(list, name) {
   this.list = list;
@@ -68,7 +6,7 @@ function Room(list, name) {
   this.infos = roomInfosOf(list);
 }
 
-export function AddRoomGrade(who) {
+export default function (who) {
   const
     ret = [],
     tmp = who.rooms,
@@ -97,10 +35,9 @@ export function AddRoomGrade(who) {
       if (now_x < min_x) min_x = now_x;
       if (now_y < min_y) min_y = now_y;
 
-      room.key = count
+      room.key = count++
       gradeCounter[room.infos.grade].push(room);
       ret.push(room)
-      count++
     }
   }
 
@@ -114,5 +51,4 @@ export function AddRoomGrade(who) {
     vx: min_x,
     vy: min_y
   }
-  who.rank = rank
 }

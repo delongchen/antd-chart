@@ -1,9 +1,5 @@
 <template>
   <page-header-wrapper>
-    <template #content>
-      <h1>TTTT</h1>
-      <p>adasd</p>
-    </template>
     <a-card :body-style="{padding: '24px 32px'}" :bordered="false">
       <a-form @submit="handleSubmit" :form="form">
         <a-form-item
@@ -87,8 +83,9 @@
             this.$store
               .dispatch('user/GetInfo', val)
               .then(() => {})
-              .catch(() => {
+              .catch((e) => {
                 this.$message.error('错误')
+                console.log(e)
             }).finally(() => void this.$store.commit('SET_LOADING', false))
           }
         })

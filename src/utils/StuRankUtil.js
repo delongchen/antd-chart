@@ -1,14 +1,29 @@
+import { scoreOf } from "@/utils/scoreUtils";
+
 export function StuRank() {
+  this.count = 0
   this._rank = []
 }
 
 StuRank.prototype.add = function (stu) {
+  stu.key = this.count++
+
+  const {vx, vy, bk} = stu.other.record
+
+  Object.assign(stu, {
+    vx,
+    vy,
+    gua: bk
+  })
+
+  stu.score = scoreOf(stu)
+  stu.tag = []
   this._rank.push(stu)
 }
 
 StuRank.prototype.build = function () {
   this._rank.sort((a, b) => {
-    return (a.vx + a.vy) - (b.vx + b.vy)
+    return b.score - a.score
   })
 }
 

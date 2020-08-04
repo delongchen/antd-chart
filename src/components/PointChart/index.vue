@@ -68,10 +68,10 @@
     },
     methods: {
       near_max(num) {
-        return (Math.floor(num / 10) + 1) * 10
+        return (Math.floor(num / 10) + (num % 10 >= 5 ? 1 : 0.5)) * 10
       },
       near_min(num) {
-        return (Math.ceil(num / 10) - 1) * 10
+        return (Math.ceil(num / 10) * 10 - 5)
       }
     },
     computed: {

@@ -1,8 +1,10 @@
 import roomConfig from "@/config/room";
+import { StuRank } from "@/utils/StuRankUtil";
 
 export function transRoomInfo(stuList) {
-  let rooms = {};
-  let not_in_school = [];
+  const rooms = {};
+  const not_in_school = [];
+  const rank = new StuRank()
 
   //classify students
   for (let stu of stuList) {
@@ -20,11 +22,13 @@ export function transRoomInfo(stuList) {
     }
 
     rooms[live].push(stu)
+    rank.add(stu)
   }
 
   const ret =  {
     rooms,
-    not_in_school
+    not_in_school,
+    rank
   }
 
   roomConfig.forEach(config => {config(ret)})

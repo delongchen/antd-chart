@@ -25,14 +25,35 @@ export const constantRouterMap = [
       {
         path: '/chart',
         name: 'chart',
-        meta: { title: '图表', icon: 'pie-chart' },
+        meta: { title: '图表', icon: 'dot-chart', keepAlive: true },
         component: () => import('@/views/chart')
       },
       {
         path: '/recommend',
         name: 'recommend',
         meta: { title: '业务推荐', icon: 'like', keepAlive: true },
-        component: () => import('@/views/recommend')
+        component: () => import('@/views/recommend'),
+        redirect: '/recommend/search',
+        children: [
+          {
+            path: '/recommend/search',
+            name: 'SearchStudent',
+            component: () => import('@/views/recommend/SearchStu'),
+            meta: { title: '查找', icon: 'monitor'}
+          },
+          {
+            path: '/recommend/scholarship',
+            name: 'Scholarship',
+            component: () => import('@/views/recommend/Scholarship'),
+            meta: { title: '奖学金情况', icon: 'bank'}
+          },
+          {
+            path: '/recommend/subsidy',
+            name: 'Subsidy',
+            component: () => import('@/views/recommend/Subsidy'),
+            meta: { title: '补贴情况', icon: 'qq'}
+          },
+        ]
       }
     ]
   }

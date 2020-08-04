@@ -1,6 +1,8 @@
 <template>
   <div>
-    <a-table :columns="columns" :data-source="selectedRoom">
+    <a-table
+      :columns="columns"
+      :data-source="selectedRoom">
       <span slot="member" slot-scope="members">
         <a-tag
           v-for="(v, k) in members"
@@ -14,9 +16,9 @@
         <a>加入对比</a>
       </span>
       <single-room
+        slot="expandedRowRender"
         slot-scope="room"
         :record="room"
-        slot="expandedRowRender"
       />
     </a-table>
   </div>
@@ -37,7 +39,7 @@
     {
       title: 'Actions',
       scopedSlots: {customRender: 'actions'},
-      key: 'actions'
+      key: 1
     }
   ]
 
@@ -61,7 +63,7 @@
       },
       selectedRoom() {
         return this.curRoom.gradeCounter[this.curColor]
-      }
+      },
     },
     methods: {
       showSinglePeople(member) {
@@ -79,7 +81,7 @@
             'cancel-text': '加入对比'
           }
         )
-      }
+      },
     }
   }
 </script>

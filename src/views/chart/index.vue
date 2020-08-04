@@ -1,6 +1,32 @@
 <template>
   <page-header-wrapper>
     <template #content>
+      <a-icon type="question-circle" @click="showDes = !showDes" style="font-size: 24px"/>
+      <a-card
+        v-show="showDes"
+        :bordered="false"
+        title="说明"
+        :body-style="{ padding: 0 }">
+        <div>
+          <a-card-grid v-for="(v, k) in colorConfig" :key="k" style="width:25%;text-align:center">
+            <a-card :bordered="false" :body-style="{ padding: 0 }">
+              <a-card-meta >
+                <div slot="title">
+                  <a-icon
+                    :type="v.icon"
+                    theme="twoTone"
+                    :two-tone-color="v.color"
+                  />
+                  <span>{{ v.tag }}</span>
+                </div>
+                <div slot="description" class="card-description">
+                  {{ v.description }}
+                </div>
+              </a-card-meta>
+            </a-card>
+          </a-card-grid>
+        </div>
+      </a-card>
     </template>
 
     <a-row :gutter="24">
@@ -20,11 +46,18 @@
 
 <script>
   import PointChart from '@/components/PointChart'
+  import { pointsColorConfig } from "@/config/pointsColorConfig";
 
   export default {
     name: "Chart",
     components: {
       PointChart
+    },
+    data() {
+      this.colorConfig = pointsColorConfig.color_mapping
+      return {
+        showDes: false
+      }
     }
   }
 </script>

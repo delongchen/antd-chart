@@ -2,27 +2,27 @@ export const TagStandard = [
   {
     title: '三好学生',
     key: 'GoodGoodGoodStudent',
-    color: '#218da0',
+    color: 'purple',
     standard: {
-      score: 5,
+      score: 10,
       canGua: false
     }
   },
   {
     title: '助学金(2019年度)',
     key: 'Scholarship2019',
-    color: '#8528ab',
+    color: 'blue',
     standard: {
-      score: 1.5,
+      score: 5,
       canGua: false
     }
   },
   {
     title: '一般困难',
     key: 'PoorGuy',
-    color: '#64a959',
+    color: 'red',
     standard: {
-      score: 10,
+      score: 30,
       canGua: true
     }
   }

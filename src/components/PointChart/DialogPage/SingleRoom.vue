@@ -1,38 +1,58 @@
 <template>
+  <div>
+    <h1>人数: {{ record.list.length }}</h1>
   <a-table
-    :pagination="false"
+    :pagination="pagination"
+    :size="size"
     :columns="columns"
-    :data-source="record.list">
+    :data-source="record.list"
+  >
     <span slot="mark" slot-scope="stu">
-      {{(stu.vx + stu.vy) / 2}}
+      {{ Math.floor(stu.score) }}
     </span>
     <span slot="tags" slot-scope="tags">
       <a-tag
         v-for="(v, k) in tags"
         :key="k"
-      >
-        {{ v }}
+        :color="standards[v].color">
+        {{ standards[v].title }}
       </a-tag>
     </span>
+    <single-people
+      slot="expandedRowRender"
+      slot-scope="room"
+      :record="room"
+    />
   </a-table>
+  </div>
 </template>
 
 <script>
+  import SinglePeople from "@/components/PointChart/DialogPage/SinglePeople";
+
   export default {
     name: "SingleRoom",
+    components: {SinglePeople},
     props: {
       record: {
         type: Object,
-        default: null
+      },
+      size: {
+        type: String,
+        default: 'default'
+      },
+      pagination: {
+        type: Boolean,
+        default: false
       }
     },
     methods: {
-      onOk () {
+      onOk() {
         return new Promise(resolve => {
           resolve(true)
         })
       },
-      onCancel () {
+      onCancel() {
         return new Promise(resolve => {
           resolve(true)
         })
@@ -51,14 +71,19 @@
           },
           {
             title: '平均成绩',
-            scopedSlots: { customRender: 'mark' }
+            scopedSlots: {customRender: 'mark'}
           },
           {
             title: '标签',
             dataIndex: 'tag',
-            scopedSlots: { customRender: 'tags' }
+            scopedSlots: {customRender: 'tags'}
           }
         ]
+      }
+    },
+    computed: {
+      standards() {
+        return this.$store.state.stuTag.standards
       }
     }
   }

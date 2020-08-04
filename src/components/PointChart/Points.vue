@@ -34,7 +34,8 @@
         this.$dialog(
           SingleRoom,
           {
-            record: room
+            record: room,
+            size: 'small'
           },
           {
             title: room.name,

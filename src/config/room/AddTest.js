@@ -1,13 +1,13 @@
 import { TagStandard } from "@/config/tagStandard";
 
-export function AddTest(who) {
+export default function (who) {
   who.rank.build()
   const rank = who.rank
 
   for (const standard of TagStandard) {
     const list = rank.frontPercent(standard.standard.score)
     list.forEach(item => {
-      if (!item.gua || (item.gua && standard.standard.canGua))
+      if (standard.standard.canGua || !item.gua)
       item.tag.push(standard.key)
     })
   }

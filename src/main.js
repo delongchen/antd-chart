@@ -8,7 +8,7 @@ import ProLayout, { PageHeaderWrapper } from '@ant-design-vue/pro-layout'
 
 Vue.config.productionTip = false
 
-import './mock'
+//import './mock'
 
 import bootstrap from "@/core/bootstrap";
 import './core/lazy_use'

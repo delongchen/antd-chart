@@ -18,7 +18,7 @@ const user = {
         if (id === null) {
           getInfo(parameter.parameter).then(response => {
             const count = rootGetters.ROOM_COUNT
-            const result = transRoomInfo(response)
+            const result = transRoomInfo(response.data)
             result.title = parameter.title.join('-')
             result.id = count
             commit('ADD_ROOM_TO_HISTORY', result, {root: true})
