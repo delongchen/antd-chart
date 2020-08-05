@@ -1,7 +1,6 @@
 import { TagStandard } from "@/config/tagStandard";
 
 export default function (who) {
-  who.rank.build()
   const rank = who.rank
 
   for (const standard of TagStandard) {

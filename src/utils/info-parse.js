@@ -1,5 +1,19 @@
 import roomConfig from "@/config/room";
 import { StuRank } from "@/utils/StuRankUtil";
+import { scoreOf } from "@/utils/scoreUtils";
+
+
+function initStu(stu) {
+  const {vx, vy, bk} = stu.other.record
+  Object.assign(stu, {
+    vx,
+    vy,
+    gua: bk
+  })
+
+  stu.score = scoreOf(stu)
+  stu.tag = []
+}
 
 export function transRoomInfo(stuList) {
   const rooms = {};
@@ -7,24 +21,19 @@ export function transRoomInfo(stuList) {
   const rank = new StuRank()
 
   //classify students
-  for (let stu of stuList) {
+  for (const stu of stuList) {
     const live = stu['live']
-    if (live === undefined) continue
-    delete stu['live']
 
-    if (live === null) {
-      not_in_school.push(stu)
-      continue
+    if (!live) not_in_school.push(stu)
+    else {
+      initStu(stu)
+      rank.add(stu);
+
+      (rooms[live] || (rooms[live] = [])).push(stu)
     }
-
-    if (!Object.prototype.hasOwnProperty.call(rooms, live)) {
-      rooms[live] = []
-    }
-
-    rooms[live].push(stu)
-    rank.add(stu)
   }
 
+  rank.build()
   const ret =  {
     rooms,
     not_in_school,
