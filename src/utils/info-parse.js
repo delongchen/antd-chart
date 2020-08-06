@@ -11,7 +11,10 @@ function initStu(stu) {
     gua: bk
   })
 
+  stu.old = Math.floor((Date.now() - new Date(stu.birthday)) / 31536000000)
+  stu.sex = stu.sex === '1' ? '男': '女'
   stu.score = scoreOf(stu)
+  stu.leader = stu.leader === 'by' ? '白银': '？？？'
   stu.tag = []
 }
 

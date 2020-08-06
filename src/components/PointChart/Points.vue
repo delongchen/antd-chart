@@ -39,7 +39,7 @@
           },
           {
             title: room.name,
-            width: 1000,
+            width: 1200,
             centered: true,
             maskClosable: false,
             'ok-text': '关闭',

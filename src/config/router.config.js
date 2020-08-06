@@ -54,7 +54,7 @@ export const constantRouterMap = [
             meta: { title: '补贴情况', icon: 'qq'}
           },
         ]
-      }
+      },
     ]
   }
 ]

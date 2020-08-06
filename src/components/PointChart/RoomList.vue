@@ -7,13 +7,13 @@
         <a-tag
           v-for="(v, k) in members"
           :key="k"
-          @click="showSinglePeople(v)"
+          @click="checkStu(v)"
           :color="v.gua ? 'red': 'green'">
           {{ v.name_stu }}
         </a-tag>
       </span>
-      <span slot="actions" slot-scope="">
-        <a>加入对比</a>
+      <span slot="actions" slot-scope="stu">
+        <router-link :to="{path: '/profile/account', params: {stu}}">more</router-link>
       </span>
       <single-room
         slot="expandedRowRender"
@@ -44,11 +44,12 @@
   ]
 
   import SingleRoom from "@/components/PointChart/DialogPage/SingleRoom";
-  import SinglePeople from "@/components/PointChart/DialogPage/SinglePeople";
+  import dialogMixin from "@/components/PointChart/DialogPage/dialogMixin";
 
   export default {
     name: "RoomList",
     components: { SingleRoom },
+    mixins: [dialogMixin],
     data() {
       return {
         columns,
@@ -66,22 +67,6 @@
       },
     },
     methods: {
-      showSinglePeople(member) {
-        this.$dialog(
-          SinglePeople,
-          {
-            record: member
-          },
-          {
-            title: member.name_stu,
-            width: 1000,
-            centered: true,
-            maskClosable: false,
-            'ok-text': '关闭',
-            'cancel-text': '加入对比'
-          }
-        )
-      },
     }
   }
 </script>
