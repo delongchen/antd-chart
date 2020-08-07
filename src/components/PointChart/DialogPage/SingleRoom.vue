@@ -7,17 +7,6 @@
     :columns="columns"
     :data-source="record.list"
   >
-    <span slot="mark" slot-scope="stu">
-      {{ Math.floor(stu.score) }}
-    </span>
-    <span slot="tags" slot-scope="tags">
-      <a-tag
-        v-for="(v, k) in tags"
-        :key="k"
-        :color="standards[v].color">
-        {{ standards[v].title }}
-      </a-tag>
-    </span>
     <span slot="action" slot-scope="stu">
       <a @click="() => void checkStu(stu)">more</a>
     </span>
@@ -73,15 +62,6 @@
           {
             dataIndex: 'num_stu',
             title: '学号'
-          },
-          {
-            title: '平均成绩',
-            scopedSlots: {customRender: 'mark'}
-          },
-          {
-            title: '标签',
-            dataIndex: 'tag',
-            scopedSlots: {customRender: 'tags'}
           },
           {
             title: 'action',

@@ -10,7 +10,6 @@
             <div class="username">{{ record.name_stu }}</div>
             <div class="bio">{{ `${record.sex} ${record.old}岁` }}</div>
           </div>
-
           <div class="account-center-detail">
             <p>
               <i class="title"></i>{{ `${record.num_gr}-${record.name_college}-${record.name_major}` }}
@@ -27,18 +26,48 @@
           </div>
         </a-card>
       </a-col>
-
       <a-col :md="24" :lg="17">
+        <a-card
+          class="score"
+          style="margin-bottom: 24px;"
+          :bordered="false"
+          :body-style="{ padding: 0 }">
+          <a-card-grid style="width:50%;text-align:center">
+            <a-card :bordered="false" :body-style="{ padding: 0 }">
+              <a-card-meta :title="`平均成绩${record.score}`">
+                <template #title>
+                  <div class="card-title"></div>
+                </template>
+                <template #description>
+                  <div class="card-description"></div>
+                </template>
+              </a-card-meta>
+            </a-card>
+          </a-card-grid>
+
+          <a-card-grid style="width:50%;text-align:center">
+            <a-card :bordered="false" :body-style="{ padding: 0 }">
+              <a-card-meta title="1">
+                <template #title>
+                  <div class="card-title"></div>
+                </template>
+                <template #description>
+                  <div class="card-description"></div>
+                </template>
+              </a-card-meta>
+            </a-card>
+          </a-card-grid>
+        </a-card>
+
         <a-card
           style="width:100%"
           :bordered="false"
-          title="title"
+          title="过往经历"
           :tab-list="tabList"
           :active-tab-key="tabKey"
           @tabChange="k => void handleTagChange(k, 'tabKey')"
         >
           {{ tabKey }}
-          {{ record }}
         </a-card>
       </a-col>
     </a-row>
@@ -72,6 +101,13 @@ export default {
   methods: {
     handleTagChange(k, type) {
       this[type] = k
+    },
+    isGua(gua) {
+      const color = 'color:' + gua ? 'red' : 'green'
+      const text = gua ? '有' : '无'
+      return (<p>
+        <span style={color}>{text}</span>挂科
+      </p>)
     }
   }
 }
@@ -94,6 +130,7 @@ export default {
       margin: 0 auto 20px;
       border-radius: 50%;
       overflow: hidden;
+
       img {
         height: 100%;
         width: 100%;
@@ -128,9 +165,11 @@ export default {
     .title {
       background-position: 0 0;
     }
+
     .group {
       background-position: 0 -22px;
     }
+
     .address {
       background-position: 0 -44px;
     }
@@ -147,6 +186,34 @@ export default {
     font-weight: 500;
     color: rgba(0, 0, 0, 0.85);
     margin-bottom: 12px;
+  }
+
+  .score {
+
+    .card-title {
+      font-size: 0;
+
+      a {
+        color: rgba(0, 0, 0, 0.85);
+        margin-left: 12px;
+        line-height: 24px;
+        height: 24px;
+        display: inline-block;
+        vertical-align: top;
+        font-size: 14px;
+
+        &:hover {
+          color: #1890ff;
+        }
+      }
+    }
+
+    .card-description {
+      color: rgba(0, 0, 0, 0.45);
+      height: 44px;
+      line-height: 22px;
+      overflow: hidden;
+    }
   }
 }
 </style>

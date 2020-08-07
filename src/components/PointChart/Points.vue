@@ -41,7 +41,7 @@
             title: room.name,
             width: 1200,
             centered: true,
-            maskClosable: false,
+            maskClosable: true,
             'ok-text': '关闭',
             'cancel-text': '加入对比'
           }
