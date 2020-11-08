@@ -27,13 +27,13 @@ export function transRoomInfo(stuList) {
   for (const stu of stuList) {
     const live = stu['live']
 
-    if (!live) not_in_school.push(stu)
-    else {
+    if (live) {
       initStu(stu)
-      rank.add(stu);
+      rank.add(stu)
 
-      (rooms[live] || (rooms[live] = [])).push(stu)
+      ;(rooms[live] || (rooms[live] = [])).push(stu)
     }
+    else not_in_school.push(stu)
   }
 
   rank.build()

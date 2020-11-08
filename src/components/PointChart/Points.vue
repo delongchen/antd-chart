@@ -7,6 +7,7 @@
     >
     <circle
       class="points"
+      :id="`p-${k}`"
       :r="v.infos.r"
       :fill="v.infos.color"
       :cx="scale_x(fx(v.infos))"
